@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const ADMIN_PASSWORD = "Jish#1098765"; // set your password
+  // 🔐 Simple frontend gate (MVP)
+  const ADMIN_PASSWORD = "Jish#1098765"; // <-- set your password
 
   const loginBox = document.getElementById("loginBox");
   const adminApp = document.getElementById("adminApp");
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     adminApp.style.display = "none";
   }
 
-  // Always gate on load
+  // Gate on load
   if (isLoggedIn()) showAdmin();
   else showLogin();
 
@@ -33,6 +34,16 @@ document.addEventListener("DOMContentLoaded", () => {
       loginError.style.display = "block";
     }
   });
+
+  // 🔒 OPTIONAL: force logout shortcut (Ctrl+Shift+L)
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "l") {
+      localStorage.removeItem("admin_logged_in");
+      showLogin();
+    }
+  });
+
+  // 👉 Place your existing Admin CRUD logic BELOW this line
 });
 const API = "https://hospital-tracker-backend.onrender.com/api/hospitals";
 const list = document.getElementById("list");
