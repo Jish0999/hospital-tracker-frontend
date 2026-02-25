@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showAdmin() {
     loginBox.style.display = "none";
     adminApp.style.display = "block";
+    showAdmin();
   }
 
   function showLogin() {
