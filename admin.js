@@ -1,5 +1,5 @@
 // 🔐 Simple admin auth (frontend-only)
-const ADMIN_PASSWORD = "change-this-strong-password"; // 👈 set your own
+const ADMIN_PASSWORD = "Jish#1098765"; // 👈 set your own
 
 const loginBox = document.getElementById("loginBox");
 const adminApp = document.getElementById("adminApp");
