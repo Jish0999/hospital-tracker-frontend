@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   // 👇 IMPORTANT: Keep your existing Admin CRUD logic BELOW this line
+});
 const API = "https://hospital-tracker-backend.onrender.com/api/hospitals";
 const list = document.getElementById("list");
 const form = document.getElementById("hospitalForm");
