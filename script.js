@@ -9,20 +9,56 @@ async function loadHospitalsFromAPI() {
     if (!res.ok) throw new Error("Hospitals API returned " + res.status);
 
     const data = await res.json();
-
-    if (!Array.isArray(data)) {
-      throw new Error("Hospitals API did not return an array");
-    }
+    if (!Array.isArray(data)) throw new Error("Hospitals API did not return array");
 
     hospitals = data;
-    populateDistricts();   // fill District dropdown
+    populateDistricts(); // call after data loads
   } catch (e) {
     console.error("Failed to load hospitals from API", e);
-    hospitals = []; // prevent crashes
+    hospitals = [];
   }
 }
+function populateDistricts() {
+  const districtSelect = document.getElementById("district");
+  districtSelect.innerHTML = '<option value="">Select District</option>';
 
-loadHospitalsFromAPI();
+  if (!Array.isArray(hospitals)) return;
+
+  const districts = [...new Set(hospitals.map(h => h.district).filter(Boolean))];
+
+  districts.forEach(d => {
+    const opt = document.createElement("option");
+    opt.value = d;
+    opt.textContent = d;
+    districtSelect.appendChild(opt);
+  });
+}
+function populateCities() {
+  const district = document.getElementById("district")?.value;
+  const citySelect = document.getElementById("city");
+
+  if (!citySelect) return;
+
+  citySelect.innerHTML = '<option value="">Select City</option>';
+
+  if (!Array.isArray(hospitals) || !district) return;
+
+  const cities = [
+    ...new Set(
+      hospitals
+        .filter(h => h.district === district)
+        .map(h => h.city)
+        .filter(Boolean)
+    )
+  ];
+
+  cities.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    citySelect.appendChild(opt);
+  });
+}
 
 setInterval(loadHospitalsFromAPI, 30000);
 
@@ -218,3 +254,4 @@ function applyAIIntent(intent) {
   setActiveStep(4);
   
 }
+loadHospitalsFromAPI();
