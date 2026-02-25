@@ -1,6 +1,7 @@
 alert("Welcome to Hospital Tracker!");
 // ✅ NEW: Load hospitals from Admin Panel backend
 // script.js (TOP of file)
+document.addEventListener("DOMContentLoaded", () => {
 let hospitals = [];
 
 async function loadHospitalsFromAPI() {
@@ -61,28 +62,6 @@ function populateCities() {
 }
 
 setInterval(loadHospitalsFromAPI, 30000);
-
-const districtSelect = document.getElementById("district");
-const citySelect = document.getElementById("city");
-
-districtSelect.addEventListener("change", () => {
-  const selectedDistrict = districtSelect.value;
-  citySelect.innerHTML = '<option value="">Select City</option>';
-
-  const cities = hospitals
-    .filter(h => h.district === selectedDistrict)
-    .map(h => h.city);
-
-  const uniqueCities = [...new Set(cities)];
-
-  uniqueCities.forEach(city => {
-    const option = document.createElement("option");
-    option.value = city;
-    option.textContent = city;
-    citySelect.appendChild(option);
-  });
-});
-
 function getDistanceKm(lat1, lng1, lat2, lng2) {
   const R = 6371; // Earth radius in km
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -131,17 +110,16 @@ function setActiveStep(n) {
     }
   });
 }
-document.getElementById("district").addEventListener("change", () => {
-  populateCities();     // update cities based on district
-  setActiveStep(1);     // stepper UX (optional)
+document.getElementById("district")?.addEventListener("change", () => {
+  populateCities();
+  setActiveStep(1);
 });
 
-document.getElementById("city").addEventListener("change", () => {
+document.getElementById("city")?.addEventListener("change", () => {
   setActiveStep(2);
 });
 
-// When Type changes → Step 3 active
-document.getElementById("type").addEventListener("change", () => {
+document.getElementById("type")?.addEventListener("change", () => {
   if (document.getElementById("type").value) {
     setActiveStep(3);
   }
@@ -255,3 +233,4 @@ function applyAIIntent(intent) {
   
 }
 loadHospitalsFromAPI();
+  });
