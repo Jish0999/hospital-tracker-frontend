@@ -1,6 +1,15 @@
+// 🔐 HARD GATE: hide admin UI immediately (even before DOMContentLoaded)
+(() => {
+  const hideAdmin = () => {
+    const adminApp = document.getElementById("adminApp");
+    if (adminApp) adminApp.style.display = "none";
+  };
+  hideAdmin();
+  document.addEventListener("DOMContentLoaded", hideAdmin);
+})();
+
 document.addEventListener("DOMContentLoaded", () => {
-  // 🔐 Simple frontend gate (MVP)
-  const ADMIN_PASSWORD = "Jish#1098765"; // <-- set your password
+  const ADMIN_PASSWORD = "change-this-strong-password"; // 👈 set your password
 
   const loginBox = document.getElementById("loginBox");
   const adminApp = document.getElementById("adminApp");
@@ -35,16 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 🔒 OPTIONAL: force logout shortcut (Ctrl+Shift+L)
+  // 🔒 Optional logout shortcut: Ctrl + Shift + L
   document.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "l") {
       localStorage.removeItem("admin_logged_in");
       showLogin();
     }
   });
-
-  // 👉 Place your existing Admin CRUD logic BELOW this line
-});
+  // 👇 IMPORTANT: Keep your existing Admin CRUD logic BELOW this line
 const API = "https://hospital-tracker-backend.onrender.com/api/hospitals";
 const list = document.getElementById("list");
 const form = document.getElementById("hospitalForm");
