@@ -9,7 +9,7 @@
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
-  const ADMIN_PASSWORD = "change-this-strong-password"; // 👈 set your password
+  const ADMIN_PASSWORD = "Jish#1098765"; // 👈 set your password
 
   const loginBox = document.getElementById("loginBox");
   const adminApp = document.getElementById("adminApp");
