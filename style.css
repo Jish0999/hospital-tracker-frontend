@@ -177,3 +177,29 @@ a {
   padding: 16px;
   border-radius: 16px;
 }
+.admin-link {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #0b5ed7;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+.admin-link:hover {
+  opacity: 0.9;
+}
+
+/* Mobile tweak */
+@media (max-width: 480px) {
+  .admin-link {
+    top: auto;
+    bottom: 12px;
+    right: 12px;
+  }
+}
