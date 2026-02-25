@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     adminApp.style.display = "none";
   }
 
+  // Always gate on load
   if (isLoggedIn()) showAdmin();
   else showLogin();
 
@@ -32,8 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
       loginError.style.display = "block";
     }
   });
-
-  // 👇 keep your existing admin logic BELOW this
 });
 const API = "https://hospital-tracker-backend.onrender.com/api/hospitals";
 const list = document.getElementById("list");
