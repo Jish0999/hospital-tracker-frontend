@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <h1>🏥 Hospital Tracker</h1>
+
+  <div class="stepper">
+  <span class="step active" id="step-1" data-step="1">1. District</span>
+  <span class="step" id="step-2" data-step="2">2. City</span>
+  <span class="step" id="step-3" data-step="3">3. Type</span>
+  <span class="step" id="step-4" data-step="4">4. Results</span>
+</div>
+
+  <select id="district">
+  <option value="">Select District</option>
+</select>
+
+  <select id="city">
+    <option value="">Select City</option>
+  </select>
+
+  <select id="type">
+    <option value="">Select Hospital Type</option>
+    <option value="Private">Private</option>
+    <option value="Government">Government</option>
+  </select>
+
+  <button onclick="findHospitals()">Find Hospitals</button>
+
+  <div class="chat">
+  <h3>🤖 Ask Hospital Tracker</h3>
+  <input id="chatInput" placeholder="e.g., Find nearest cardiac hospital" />
+  <button onclick="handleChat()">Ask</button>
+  </div>
+
+  <div id="results"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

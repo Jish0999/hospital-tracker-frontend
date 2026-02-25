@@ -1,0 +1,173 @@
+body {
+  background-color: #f4f6f8;
+  font-family: Arial;
+  text-align: center;
+}
+
+/* Base responsive layout */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.filters, .chat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+select, input, button {
+  font-size: 16px; /* prevent iOS zoom */
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+button {
+  min-height: 44px; /* touch target */
+}
+
+/* Stepper responsive */
+.stepper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.step {
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* Cards on mobile */
+.card {
+  padding: 12px;
+  border-radius: 14px;
+  margin: 10px 0;
+}
+
+.card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.card p, .card a {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Chat mobile */
+.chat {
+  width: 100%;
+  max-width: 100%;
+}
+
+.chat input {
+  width: 100%;
+}
+
+h1 {
+  color: #0077cc;
+}
+.card {
+  background: white;
+  margin: 12px auto;
+  padding: 16px;
+  width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: left;
+}
+.stepper {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.step {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #e6eef7;
+  font-size: 14px;
+}
+
+.step.active {
+  background: #0077cc;
+  color: white;
+}
+select, button {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d0d7de;
+}
+
+button {
+  background: #0077cc;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+a {
+  display: inline-block;
+  margin-top: 6px;
+  text-decoration: none;
+}
+.chat {
+  margin: 20px auto;
+  width: 340px;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.chat input {
+  width: 70%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+}
+
+.step {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.step.active {
+  background: #0077cc;
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(0, 119, 204, 0.25);
+}
+
+.step.completed {
+  background: #e8f6ee;
+  color: #1f7a4d;
+  box-shadow: inset 0 0 0 1px #a9e0c7;
+}
+
+.step.completed::before {
+  content: "";
+}
+
+@media (min-width: 768px) {
+  .filters {
+    grid-template-columns: repeat(3, 1fr) auto;
+    align-items: center;
+  }
+
+  .chat {
+    max-width: 420px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}
