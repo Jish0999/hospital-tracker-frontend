@@ -8,6 +8,7 @@
   document.addEventListener("DOMContentLoaded", hideAdmin);
 })();
 
+// admin.js — known-good login gate (no syntax errors)
 document.addEventListener("DOMContentLoaded", () => {
   const ADMIN_PASSWORD = "Jish#1098765"; // 👈 set your password
 
@@ -23,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function showAdmin() {
     loginBox.style.display = "none";
     adminApp.style.display = "block";
-    showAdmin();
   }
 
   function showLogin() {
@@ -44,15 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
       loginError.style.display = "block";
     }
   });
-
-  // 🔒 Optional logout shortcut: Ctrl + Shift + L
-  document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "l") {
-      localStorage.removeItem("admin_logged_in");
-      showLogin();
-    }
-  });
-  // 👇 IMPORTANT: Keep your existing Admin CRUD logic BELOW this line
 });
 const API = "https://hospital-tracker-backend.onrender.com/api/hospitals";
 const list = document.getElementById("list");
