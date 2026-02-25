@@ -1,50 +1,27 @@
 alert("Welcome to Hospital Tracker!");
 // ✅ NEW: Load hospitals from Admin Panel backend
+// script.js (TOP of file)
 let hospitals = [];
 
 async function loadHospitalsFromAPI() {
   try {
-    const res = await fetch("https://hospital-tracker-backend.onrender.com");
-    hospitals = await res.json();
-    populateDistricts();
-    console.log("Hospitals loaded from API:", hospitals.length);
-  } catch (err) {
-    console.error("Failed to load hospitals from API", err);
+    const res = await fetch("https://hospital-tracker-backend.onrender.com/api/hospitals");
+    if (!res.ok) throw new Error("Hospitals API returned " + res.status);
+
+    const data = await res.json();
+
+    if (!Array.isArray(data)) {
+      throw new Error("Hospitals API did not return an array");
+    }
+
+    hospitals = data;
+    populateDistricts();   // fill District dropdown
+  } catch (e) {
+    console.error("Failed to load hospitals from API", e);
+    hospitals = []; // prevent crashes
   }
 }
 
-function populateDistricts() {
-  const districtSelect = document.getElementById("district");
-  districtSelect.innerHTML = '<option value="">Select District</option>';
-
-  const districts = [...new Set(hospitals.map(h => h.district))].filter(Boolean);
-
-  districts.forEach(d => {
-    const opt = document.createElement("option");
-    opt.value = d;
-    opt.textContent = d;
-    districtSelect.appendChild(opt);
-  });
-}
-
-function populateCities() {
-  const district = document.getElementById("district").value;
-  const citySelect = document.getElementById("city");
-  citySelect.innerHTML = '<option value="">Select City</option>';
-
-  const cities = [...new Set(
-    hospitals.filter(h => h.district === district).map(h => h.city)
-  )].filter(Boolean);
-
-  cities.forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = c;
-    citySelect.appendChild(opt);
-  });
-}
-
-// Load once when page opens
 loadHospitalsFromAPI();
 
 setInterval(loadHospitalsFromAPI, 30000);
