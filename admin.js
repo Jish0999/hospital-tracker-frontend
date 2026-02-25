@@ -1,37 +1,39 @@
-// 🔐 Simple admin auth (frontend-only)
-const ADMIN_PASSWORD = "Jish#1098765"; // 👈 set your own
+document.addEventListener("DOMContentLoaded", () => {
+  const ADMIN_PASSWORD = "change-this-strong-password"; // set your password
 
-const loginBox = document.getElementById("loginBox");
-const adminApp = document.getElementById("adminApp");
-const loginBtn = document.getElementById("loginBtn");
-const loginError = document.getElementById("loginError");
+  const loginBox = document.getElementById("loginBox");
+  const adminApp = document.getElementById("adminApp");
+  const loginBtn = document.getElementById("loginBtn");
+  const loginError = document.getElementById("loginError");
 
-function isLoggedIn() {
-  return localStorage.getItem("admin_logged_in") === "true";
-}
-
-function showAdmin() {
-  loginBox.style.display = "none";
-  adminApp.style.display = "block";
-}
-
-function showLogin() {
-  loginBox.style.display = "block";
-  adminApp.style.display = "none";
-}
-
-// On page load
-if (isLoggedIn()) showAdmin();
-else showLogin();
-
-loginBtn?.addEventListener("click", () => {
-  const pass = document.getElementById("adminPass").value;
-  if (pass === ADMIN_PASSWORD) {
-    localStorage.setItem("admin_logged_in", "true");
-    showAdmin();
-  } else {
-    loginError.style.display = "block";
+  function isLoggedIn() {
+    return localStorage.getItem("admin_logged_in") === "true";
   }
+
+  function showAdmin() {
+    loginBox.style.display = "none";
+    adminApp.style.display = "block";
+  }
+
+  function showLogin() {
+    loginBox.style.display = "block";
+    adminApp.style.display = "none";
+  }
+
+  if (isLoggedIn()) showAdmin();
+  else showLogin();
+
+  loginBtn.addEventListener("click", () => {
+    const pass = document.getElementById("adminPass").value;
+    if (pass === ADMIN_PASSWORD) {
+      localStorage.setItem("admin_logged_in", "true");
+      showAdmin();
+    } else {
+      loginError.style.display = "block";
+    }
+  });
+
+  // 👇 keep your existing admin logic BELOW this
 });
 const API = "https://hospital-tracker-backend.onrender.com/api/hospitals";
 const list = document.getElementById("list");
