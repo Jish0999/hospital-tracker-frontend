@@ -9,8 +9,9 @@
 })();
 
 // admin.js — known-good login gate (no syntax errors)
+// admin.js — hard-gated admin login (bulletproof)
 document.addEventListener("DOMContentLoaded", () => {
-  const ADMIN_PASSWORD = "Jish#1098765"; // 👈 set your password
+  const ADMIN_PASSWORD = "change-this-strong-password"; // 👈 set your password
 
   const loginBox = document.getElementById("loginBox");
   const adminApp = document.getElementById("adminApp");
@@ -31,9 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
     adminApp.style.display = "none";
   }
 
-  // Gate on load
+  // Always start locked
+  showLogin();
+
+  // Unlock only if session exists
   if (isLoggedIn()) showAdmin();
-  else showLogin();
 
   loginBtn.addEventListener("click", () => {
     const pass = document.getElementById("adminPass").value;
@@ -44,6 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
       loginError.style.display = "block";
     }
   });
+
+  // 🔒 Optional: Logout shortcut
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "l") {
+      localStorage.removeItem("admin_logged_in");
+      showLogin();
+    }
+  });
+
+  // 👉 Put your existing Admin CRUD logic BELOW this line
 });
 const API = "https://hospital-tracker-backend.onrender.com/api/hospitals";
 const list = document.getElementById("list");
