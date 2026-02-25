@@ -2,6 +2,7 @@ alert("Welcome to Hospital Tracker!");
 // ✅ NEW: Load hospitals from Admin Panel backend
 // script.js (TOP of file)
 document.addEventListener("DOMContentLoaded", () => {
+document.getElementById("findBtn")?.addEventListener("click", findHospitals);
 let hospitals = [];
 
 async function loadHospitalsFromAPI() {
