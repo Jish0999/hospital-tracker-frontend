@@ -38,15 +38,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Unlock only if session exists
   if (isLoggedIn()) showAdmin();
 
-  loginBtn.addEventListener("click", () => {
-    const pass = document.getElementById("adminPass").value;
-    if (pass === ADMIN_PASSWORD) {
-      localStorage.setItem("admin_logged_in", "true");
-      showAdmin();
-    } else {
-      loginError.style.display = "block";
-    }
+  async function login() {
+  const pass = document.getElementById("adminPass").value;
+
+  const res = await fetch("https://hospital-tracker-backend.onrender.com/admin/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password: pass })
   });
+
+  if (!res.ok) {
+    document.getElementById("loginError").style.display = "block";
+    return;
+  }
+
+  const data = await res.json();
+  localStorage.setItem("admin_token", data.token);
+  showAdmin();
+}
+
+loginBtn.addEventListener("click", login);
 
   // 🔒 Optional: Logout shortcut
   document.addEventListener("keydown", (e) => {
