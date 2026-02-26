@@ -130,9 +130,23 @@ await fetch(API, {
 
 async function deleteHospital(id) {
   try {
-    await fetch(`${API}/${id}`, { method: "DELETE" });
-    loadHospitals();
-  } catch (e) {
+    async function deleteHospital(id) {
+  const token = localStorage.getItem("admin_token");
+
+  const res = await fetch(`${API}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
+
+  if (!res.ok) {
+    alert("Unauthorized or failed to delete");
+    return;
+  }
+
+  loadHospitals();
+} catch (e) {
     console.error("Delete failed", e);
     alert("❌ Failed to delete hospital.");
   }
