@@ -107,11 +107,16 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    const res = await fetch(API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+    const res = const token = localStorage.getItem("admin_token");
+
+await fetch(API, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + token
+  },
+  body: JSON.stringify(data)
+});
 
     if (!res.ok) throw new Error("POST failed");
 
