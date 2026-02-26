@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Unlock only if session exists
   if (isLoggedIn()) showAdmin();
+else showLogin();
 
   async function login() {
   const pass = document.getElementById("adminPass").value;
