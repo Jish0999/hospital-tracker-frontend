@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginError = document.getElementById("loginError");
 
   function isLoggedIn() {
-    return localStorage.getItem("admin_logged_in") === "true";
-  }
+  return !!localStorage.getItem("admin_token");
+}
 
   function showAdmin() {
     loginBox.style.display = "none";
