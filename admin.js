@@ -107,17 +107,17 @@ form.addEventListener("submit", async (e) => {
     emergency24x7: document.getElementById("emergency24x7").checked
   };
 
-  try {
-    const res = const token = localStorage.getItem("admin_token");
+ try {
+  const token = localStorage.getItem("admin_token");
 
-await fetch(API, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer " + token
-  },
-  body: JSON.stringify(data)
-});
+  const res = await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
+    },
+    body: JSON.stringify(data)
+  });
 
     if (!res.ok) throw new Error("POST failed");
 
