@@ -155,3 +155,4 @@ async function deleteHospital(id) {
     alert("❌ Failed to delete hospital.");
   }
 }
+loadHospitals();
