@@ -107,7 +107,7 @@ form.addEventListener("submit", async (e) => {
     emergency24x7: document.getElementById("emergency24x7").checked
   };
 
- try {
+try {
   const token = localStorage.getItem("admin_token");
 
   const res = await fetch(API, {
@@ -119,38 +119,39 @@ form.addEventListener("submit", async (e) => {
     body: JSON.stringify(data)
   });
 
-    if (!res.ok) throw new Error("POST failed");
-
-    form.reset();
-    loadHospitals();
-  } catch (e) {
-    console.error("Save failed", e);
-    alert("❌ Failed to save hospital. Check server and console.");
-  }
-});
-
-async function deleteHospital(id) {
-  try {
-    async function deleteHospital(id) {
-  const token = localStorage.getItem("admin_token");
-
-  const res = await fetch(`${API}/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Authorization": "Bearer " + token
-    }
-  });
-
   if (!res.ok) {
-    alert("Unauthorized or failed to delete");
+    alert("Failed to save hospital");
     return;
   }
 
+  alert("Hospital saved successfully");
   loadHospitals();
-} catch (e) {
+
+} catch (err) {
+  console.error(err);
+  alert("Something went wrong");
+}
+
+async function deleteHospital(id) {
+  try {
+    const token = localStorage.getItem("admin_token");
+
+    const res = await fetch(`${API}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    });
+
+    if (!res.ok) {
+      alert("Unauthorized or failed to delete");
+      return;
+    }
+
+    loadHospitals();
+
+  } catch (e) {
     console.error("Delete failed", e);
     alert("❌ Failed to delete hospital.");
   }
 }
-
-loadHospitals();
